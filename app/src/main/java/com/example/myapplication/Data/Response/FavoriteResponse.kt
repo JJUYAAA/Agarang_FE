@@ -7,9 +7,9 @@ public final data class FavoriteResponse(
     val result: FavoriteResult
 )
 data class FavoriteResult(
-    val memories: List<Memory>
+    val memories: List<Memories>
 )
-data class Memory(
+data class Memories(
     val id: Int,
     val imageUrl: String
 )
