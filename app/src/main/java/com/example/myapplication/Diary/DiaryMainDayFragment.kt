@@ -20,7 +20,6 @@ class DiaryMainDayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDiaryMainDayBinding.inflate(inflater, container, false)
-        initData()
         initRecyclerView()
         return binding.root
     }
@@ -52,15 +51,5 @@ class DiaryMainDayFragment : Fragment() {
             .commit()
     }
 
-    private fun initData() {
-        // 실제 애플리케이션에서는 이 부분을 데이터베이스나 API에서 데이터를 가져오는 로직으로 대체해야 합니다.
-        for (i in 1..31) {
-            diaryDayItemList.add(
-                DiaryMainDayData(
-                    R.drawable.post_sample,
-                    "2024 / 5 / $i"
-                )
-            )
-        }
-    }
+
 }

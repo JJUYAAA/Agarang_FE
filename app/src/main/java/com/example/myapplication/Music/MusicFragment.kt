@@ -30,7 +30,7 @@ class MusicFragment : Fragment() {
     }
 
     private fun recycler() {
-        musicMainAdapter=MusicMainAdapter(itemList)
+        musicMainAdapter=MusicMainAdapter(itemList,requireActivity())
         binding.rvMusic.adapter=musicMainAdapter
         val spacingVertical=resources.getDimensionPixelSize(R.dimen.item_spacing)
         val spanCount=2

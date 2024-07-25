@@ -1,14 +1,19 @@
 package com.example.myapplication.Diary
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myapplication.Data.Response.FavoriteResponse
 import com.example.myapplication.R
+import com.example.myapplication.Retrofit.FavoriteRetrofit
 import com.example.myapplication.databinding.FragmentDiaryMainBookmarkBinding
-
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DiaryMainBookmarkFragment : Fragment() {
 
@@ -22,10 +27,9 @@ class DiaryMainBookmarkFragment : Fragment() {
     ): View? {
         binding = FragmentDiaryMainBookmarkBinding.inflate(inflater, container, false)
 
-        //데이터 생성
-        initData()
-        //RecyclerView 생성
         initRecyclerView()
+
+        fetchFavoriteData()
 
         return binding.root
     }
@@ -40,33 +44,27 @@ class DiaryMainBookmarkFragment : Fragment() {
         binding.rvDiaryDay.addItemDecoration(SquareItemDecoration(spanCount))
     }
 
-    private fun initData() {
-        DiaryBookmarkitemList.addAll(
-            arrayListOf(
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 1"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 2"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 4"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 5"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 6"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 7"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 8"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 9"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 10"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 11"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 12"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 13"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 14"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 15"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 16"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 17"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 18"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 19"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 20"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 21"),
-                DiaryMainDayData(R.drawable.post_sample1, "2024 / 5 / 22")
-            )
-        )
+    private fun fetchFavoriteData() {
+        FavoriteRetrofit.FavoriteService.getFavorite("favorite").enqueue(object : Callback<FavoriteResponse> {
+            override fun onResponse(call: Call<FavoriteResponse>, response: Response<FavoriteResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.result?.memories?.let { memories ->
+                        for (memory in memories) {
+                            DiaryBookmarkitemList.add(DiaryMainDayData(imageUrl = memory.imageUrl, date = "2024/5/1"))
+                        }
+                        DiaryBookmarkAdapter?.notifyDataSetChanged()
+                    }
+                } else {
+                    /*Log.e("DiaryMainBookmarkFragment", "Response error: ${response.errorBody()}")*/
+                    // 오류 응답 처리
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("DiaryMainBookmarkFragment", "Response error: $errorBody")
+                }
+            }
+
+            override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
+                Log.e("DiaryMainBookmarkFragment", "API call failed: ${t.message}")
+            }
+        })
     }
-
-
 }

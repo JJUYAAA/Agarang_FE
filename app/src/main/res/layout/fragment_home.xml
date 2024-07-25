@@ -118,13 +118,13 @@
 
     <FrameLayout
         android:id="@+id/fl_music_bar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints">
         <ImageView
             android:id="@+id/iv_music_background"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_music_bar"/>
         <com.google.android.material.imageview.ShapeableImageView

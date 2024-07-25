@@ -22,8 +22,7 @@ class DiaryMainMonthFragment : Fragment() {
     ): View? {
         binding = FragmentDiaryMainMonthBinding.inflate(inflater, container, false)
 
-        //데이터 생성
-        initData()
+
         //RecyclerView 생성
         initRecyclerView()
 
@@ -38,33 +37,6 @@ class DiaryMainMonthFragment : Fragment() {
 
     }
 
-    private fun initData() {
-        DiaryMonthitemList.addAll(
-            arrayListOf(
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 3 / 1"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 2"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 4"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 4 / 5"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 6"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 7"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 8"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 9"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 10"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 11"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 12"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 13"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 14"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 15"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 16"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 17"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 18"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 6 / 19"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 20"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 5 / 21"),
-                DiaryMainDayData(R.drawable.post_sample, "2024 / 7 / 22")
-            )
-        )
 
-    }
 
 }

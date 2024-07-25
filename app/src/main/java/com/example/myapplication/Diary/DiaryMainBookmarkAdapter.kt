@@ -13,10 +13,19 @@ class DiaryMainBookmarkAdapter (val context: Context, val items: ArrayList<Diary
     inner class ViewHolder(val binding: GridBookmarkItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : DiaryMainDayData){
 
-            Glide.with(context)
+            /*Glide.with(context)
                 .load(item.imageResId)
                 .centerCrop()
-                .into(binding.ivDay)
+                .into(binding.ivDay)*/
+
+            // 이미지 로드
+            if (item.imageUrl != null) {
+                Glide.with(context).load(item.imageUrl).into(binding.ivDay)
+            } else if (item.imageResId != null) {
+                binding.ivDay.setImageResource(item.imageResId)
+            }
+            /*// 날짜 설정
+            binding.textViewDate.text = item.date*/
         }
     }
 
